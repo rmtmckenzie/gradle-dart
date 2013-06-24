@@ -38,7 +38,7 @@ class DartPluginExtension {
         this.project = project
 
         String projectDirectory = "${project.getProjectDir().toString()}"
-        String defaultSourceDirectory = combineStringsWithSlash(projectDirectory, "lib/src")
+        String defaultSourceDirectory = combineStringsWithSlash(projectDirectory, "lib/")
         String defaultTestDirectory = combineStringsWithSlash(projectDirectory, "test")
         project.dart {
             dartSdkBin = ''
