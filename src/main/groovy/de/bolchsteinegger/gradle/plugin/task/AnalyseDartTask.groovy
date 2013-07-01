@@ -43,7 +43,12 @@ class AnalyseDartTask extends DefaultTask {
     }
 
     Boolean folderShallBeTested(File folder) {
+        boolean isPackageFolder = folder.toString().endsWith("packages");
+        boolean packageFoldersShallBeAnalysed = project.dart.analysePackagesFolders;
+        if (isPackageFolder && !packageFoldersShallBeAnalysed) return false;
+        boolean isSourceFolder = folder.toString().endsWith("src");
+        if (isSourceFolder) return false;
 
-        return (!(folder.toString().endsWith("packages") && !project.dart.analysePackagesFolders) && (!folder.toString().endsWith("src")))
+        return true;
     }
 }

@@ -43,8 +43,18 @@ class TestDartTask extends DefaultTask {
         return executedFileCount
     }
 
-    Boolean folderShallBeTested(File folder) {
+    Boolean fileShallBeTested(File file) {
+        boolean isConfigurationFile = file.toString().endsWith('conf.dart');
+        if (isConfigurationFile) return false;
 
-        return !folder.toString().endsWith("packages") || project.dart.testPackagesFolders
+        return true;
+    }
+
+    Boolean folderShallBeTested(File folder) {
+        boolean isPackageFolder = folder.toString().endsWith("packages");
+        boolean packageFoldersShallBeTested = project.dart.testPackagesFolders;
+        if (isPackageFolder && !packageFoldersShallBeTested) return false;
+
+        return true;
     }
 }
