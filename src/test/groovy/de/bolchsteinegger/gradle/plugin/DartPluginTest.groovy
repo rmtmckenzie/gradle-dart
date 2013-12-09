@@ -1,9 +1,11 @@
 package de.bolchsteinegger.gradle.plugin
 
 import de.bolchsteinegger.gradle.plugin.task.AnalyseDartTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubInstallTask
+import de.bolchsteinegger.gradle.plugin.task.DartPubGetTask
+import de.bolchsteinegger.gradle.plugin.task.DartPubBuildTask
 import de.bolchsteinegger.gradle.plugin.task.DartPubPublishTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubUpdateTask
+import de.bolchsteinegger.gradle.plugin.task.DartPubServeTask
+import de.bolchsteinegger.gradle.plugin.task.DartPubUpgradeTask
 import de.bolchsteinegger.gradle.plugin.task.ExecuteWithDartVmTask
 import de.bolchsteinegger.gradle.plugin.task.TestDartTask
 import org.gradle.api.Project
@@ -20,8 +22,10 @@ class DartPluginWithoutConfigurationTest extends Specification {
 
 	def "tasks should be added"() {
 		expect:
-        project.tasks.pubInstall instanceof DartPubInstallTask
-        project.tasks.pubUpdate instanceof DartPubUpdateTask
+        project.tasks.pubGet instanceof DartPubGetTask
+        project.tasks.pubUpgrade instanceof DartPubUpgradeTask
+        project.tasks.pubBuild instanceof DartPubBuildTask
+        project.tasks.pubServe instanceof DartPubServeTask
         project.tasks.pubPublish instanceof DartPubPublishTask
         project.tasks.analyseDart instanceof AnalyseDartTask
         project.tasks.testDart instanceof TestDartTask
