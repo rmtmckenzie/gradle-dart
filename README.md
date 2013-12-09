@@ -11,7 +11,7 @@ dart {
     dartSdkHome: '/usr/share/dart-sdk'
     relativeSourceDirectory: 'lib/src'
 }
-defaultTask 'pubInstall', 'testDart'
+defaultTask 'pubGet', 'pubBuild', 'testDart'
 buildscript {
         repositories {
                 maven { url "http://travep.de/maven/" }
@@ -24,8 +24,10 @@ buildscript {
 
 
 ##Available gradle tasks
- - __pubInstall__ (resolves dependencies with pub install)
- - __pubUpdate__ (updates dependencies with pub update)
+ - __pubGet__ (resolves dependencies with pub get)
+ - __pubUpgrade__ (upgrade project with latest versions of dependencies with pub upgrade)
+ - __pubBuild__ (build project)
+ - __pubServe__ (start a development server for your webapp)
  - __pubPublish__ (publishes the project with pub publish)
  - __analyseDart__ (alayses files in source folder)
  - __testDart__ (executes tests in test folder)
