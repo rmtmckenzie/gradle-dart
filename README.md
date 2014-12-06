@@ -1,7 +1,10 @@
+#Development freezed
+This notice is kind of late, but my focus was somewhere else. I am not working with dart anymore and, therefore, I will not develope the plugin any further. Hopefully there are people working on the code in their own forks. Feel free to do so.
+
 #Gradle Dart Plugin
 
 Provides gradle integration for Dart projects.
-> Contribution is highly welcome! Feel free to ask for contribution or fork the project as often as you want.
+
 
 ##Example usage
 
