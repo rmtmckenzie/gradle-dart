@@ -9,7 +9,7 @@ sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
 
 ext {
-	spockVersion = '0.7-groovy-1.8'
+	spockVersion = '1.0-groovy-2.4'
 }
 
 repositories {
