@@ -1,33 +1,47 @@
-apply plugin: 'groovy'
-apply plugin: 'maven'
-apply plugin: 'idea'
-
-group = 'de.bolchsteinegger'
-version = '0.2.0'
-
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
-
-ext {
-	spockVersion = '1.0-groovy-2.4'
-}
-
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-	compile localGroovy()
-
-	compile gradleApi()
-
-	testCompile ("org.spockframework:spock-core:$spockVersion") {
-		exclude module: "junit-dep"
-		exclude module: "groovy-all"
+buildscript {
+	repositories {
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "com.gradle.publish:plugin-publish-plugin:0.9.6"
 	}
 }
 
-idea.module {
-	downloadJavadoc = true
-	downloadSources = true
+apply plugin: 'groovy'
+apply plugin: 'com.gradle.plugin-publish'
+
+repositories {
+    jcenter()
+}
+
+ext {
+    spockVersion = '1.0-groovy-2.4'
+}
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+    testCompile ("org.spockframework:spock-core:$spockVersion") {
+        exclude module: "junit-dep"
+        exclude module: "groovy-all"
+    }
+}
+
+group = 'com.github.ngyewch'
+version = '0.3.0'
+
+pluginBundle {
+    website = 'https://github.com/ngyewch/gradle-dart'
+    vcsUrl = 'https://github.com/ngyewch/gradle-dart.git'
+    description = 'Gradle Dart plugin.'
+    tags = ['dart']
+
+    plugins {
+        dartPlugin {
+            id = 'com.github.ngyewch.dart'
+            displayName = 'Gradle Dart plugin'
+        }
+    }
 }

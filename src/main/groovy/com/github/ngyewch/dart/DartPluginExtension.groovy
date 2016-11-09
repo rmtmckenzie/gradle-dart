@@ -1,4 +1,4 @@
-package de.bolchsteinegger.gradle.plugin
+package com.github.ngyewch.dart
 
 import org.gradle.util.ConfigureUtil;
 import org.gradle.api.Project

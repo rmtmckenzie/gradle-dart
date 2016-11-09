@@ -1,19 +1,20 @@
-package de.bolchsteinegger.gradle.plugin.task
+package com.github.ngyewch.dart.task
 
-import groovy.io.FileType
-import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import org.slf4j.Logger
+import org.apache.tools.ant.taskdefs.condition.Os
+import groovy.io.FileType
 
-class AnalyseDartTask extends DefaultTask {
+
+class TestDartTask extends DefaultTask {
 
     @TaskAction
     def run() {
-        String dartExecutable = "${project.dart.dartSdkBin}dartanalyzer"
-        project.logger.lifecycle("Analysing files in \"${project.dart.sourceDirectory}\".")
-        Integer fileCount = executeDartFilesInPath("${project.dart.sourceDirectory}", dartExecutable)
-        project.logger.lifecycle("Analysed $fileCount files.")
+        String dartExecutable = "${project.dart.dartSdkBin}dart"
+        project.logger.lifecycle("Executing tests in \"${project.dart.testDirectory}\".")
+        Integer testsCount = executeDartFilesInPath("${project.dart.testDirectory}", dartExecutable)
+        project.logger.lifecycle("Executed $testsCount tests.")
     }
 
     Integer executeDartFilesInPath(String path, String dartExecutable) {
@@ -21,9 +22,9 @@ class AnalyseDartTask extends DefaultTask {
         File files = new File(path)
         if (files.exists() && folderShallBeTested(files)) {
             files.eachFileMatch(FileType.FILES, ~/.*\.dart/) { file ->
-                project.logger.lifecycle("Analysing file: ${file}")
+                project.logger.lifecycle("Running test file: ${file}")
                 project.exec {
-                    workingDir = project.dart.sourceDirectory
+                    workingDir = project.dart.testDirectory
                     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
                         commandLine "cmd", "/c", dartExecutable, "${file}"
                         commandLine.addAll(project.dart.commandLineParameters)
@@ -42,12 +43,17 @@ class AnalyseDartTask extends DefaultTask {
         return executedFileCount
     }
 
+    Boolean fileShallBeTested(File file) {
+        boolean isConfigurationFile = file.toString().endsWith('conf.dart');
+        if (isConfigurationFile) return false;
+
+        return true;
+    }
+
     Boolean folderShallBeTested(File folder) {
         boolean isPackageFolder = folder.toString().endsWith("packages");
-        boolean packageFoldersShallBeAnalysed = project.dart.analysePackagesFolders;
-        if (isPackageFolder && !packageFoldersShallBeAnalysed) return false;
-        boolean isSourceFolder = folder.toString().endsWith("src");
-        if (isSourceFolder) return false;
+        boolean packageFoldersShallBeTested = project.dart.testPackagesFolders;
+        if (isPackageFolder && !packageFoldersShallBeTested) return false;
 
         return true;
     }

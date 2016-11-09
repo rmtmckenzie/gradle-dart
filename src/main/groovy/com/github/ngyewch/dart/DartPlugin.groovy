@@ -1,13 +1,13 @@
-package de.bolchsteinegger.gradle.plugin
+package com.github.ngyewch.dart
 
-import de.bolchsteinegger.gradle.plugin.task.AnalyseDartTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubGetTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubBuildTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubPublishTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubServeTask
-import de.bolchsteinegger.gradle.plugin.task.DartPubUpgradeTask
-import de.bolchsteinegger.gradle.plugin.task.ExecuteWithDartVmTask
-import de.bolchsteinegger.gradle.plugin.task.TestDartTask
+import com.github.ngyewch.dart.task.AnalyseDartTask
+import com.github.ngyewch.dart.task.DartPubGetTask
+import com.github.ngyewch.dart.task.DartPubBuildTask
+import com.github.ngyewch.dart.task.DartPubPublishTask
+import com.github.ngyewch.dart.task.DartPubServeTask
+import com.github.ngyewch.dart.task.DartPubUpgradeTask
+import com.github.ngyewch.dart.task.ExecuteWithDartVmTask
+import com.github.ngyewch.dart.task.TestDartTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

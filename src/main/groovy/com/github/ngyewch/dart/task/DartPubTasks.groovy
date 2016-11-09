@@ -1,4 +1,4 @@
-package de.bolchsteinegger.gradle.plugin.task
+package com.github.ngyewch.dart.task
 
 import org.gradle.api.tasks.TaskAction
 

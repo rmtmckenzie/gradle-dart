@@ -1,4 +1,4 @@
-package de.bolchsteinegger.gradle.plugin.task
+package com.github.ngyewch.dart.task
 
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.DefaultTask
