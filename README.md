@@ -2,6 +2,7 @@
 
 Provides Gradle integration for Dart projects.
 
+Forked from [steineggerroland/gradle-dart](https://github.com/steineggerroland/gradle-dart)
 
 ## Example usage
 
