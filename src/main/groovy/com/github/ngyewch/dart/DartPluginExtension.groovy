@@ -1,6 +1,5 @@
 package com.github.ngyewch.dart
 
-import org.gradle.util.ConfigureUtil;
 import org.gradle.api.Project
 
 class DartPluginExtension {
@@ -13,6 +12,7 @@ class DartPluginExtension {
     String testDirectory
     Boolean testPackagesFolders
     Boolean analysePackagesFolders
+    String buildOutputDirectory
 
     Project project;
 
@@ -40,6 +40,7 @@ class DartPluginExtension {
         String projectDirectory = "${project.getProjectDir().toString()}"
         String defaultSourceDirectory = combineStringsWithSlash(projectDirectory, "lib/")
         String defaultTestDirectory = combineStringsWithSlash(projectDirectory, "test")
+        String defaultBuildOutputDirectory = combineStringsWithSlash(projectDirectory, "build/dart")
         project.dart {
             dartSdkBin = ''
             executableDartFiles = new HashSet<String>()
@@ -50,6 +51,7 @@ class DartPluginExtension {
             testDirectory = defaultTestDirectory
             testPackagesFolders = false
             analysePackagesFolders = false
+            buildOutputDirectory = defaultBuildOutputDirectory
         }
         if (System.getenv('DART_SDK') != null) {
             project.dart.dartSdkBin = combineStringsWithSlash("${System.getenv('DART_SDK')}", "bin/")

@@ -12,16 +12,6 @@ class DartPubGetTask extends AbstractPubTask {
 
 }
 
-class DartPubBuildTask extends AbstractPubTask {
-
-    @TaskAction
-    def run() {
-        project.logger.lifecycle("Building project")
-        executePubCommand("build")
-    }
-
-}
-
 class DartPubUpgradeTask extends AbstractPubTask {
 
     @TaskAction

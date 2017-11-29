@@ -19,4 +19,20 @@ abstract class AbstractPubTask extends DefaultTask {
             }
         }
     }
+
+    void executePubCommand(String command, Set<String> commandLineParameters) {
+        String pubspecDirectory = project.dart.pubspecDirectory
+        String pubExecutable = "${project.dart.dartSdkBin}pub"
+
+        project.exec {
+            workingDir = pubspecDirectory
+            if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+                commandLine 'cmd', '/c', pubExecutable, command
+            } else {
+                executable = pubExecutable
+                args = [command]
+                args.addAll(project.dart.commandLineParameters)
+            }
+        }
+    }
 }

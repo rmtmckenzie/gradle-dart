@@ -50,3 +50,7 @@ Forked from [steineggerroland/gradle-dart](https://github.com/steineggerroland/g
 - __testPackagesFolders__
   - Default: false
   - Define whether packages folder shall be tested.
+
+- __buildOutputDirectory__
+  - Default: build/dart
+  - Directory of build output

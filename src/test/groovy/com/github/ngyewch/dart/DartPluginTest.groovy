@@ -47,6 +47,7 @@ class DartPluginWithConfigurationTest extends Specification {
     final String TEST_RELATIVE_SOURCE_DIRECTORY = "TEST_RELATIVE_SOURCE_DIRECTORY"
     final String TEST_TEST_DIRECTORY = "TEST_TEST_DIRECTORY"
     final String TEST_RELATIVE_TEST_DIRECTORY = "TEST_RELATIVE_TEST_DIRECTORY"
+    final String TEST_BUILD_OUTPUT_DIRECTORY = "TEST_BUILD_OUTPUT_DIRECTORY"
 
     def setup() {
         project.apply plugin: DartPlugin
@@ -62,6 +63,7 @@ class DartPluginWithConfigurationTest extends Specification {
             pubspecDirectory = TEST_PUBSPEC_DIRECTORY
             sourceDirectory = TEST_SOURCE_DIRECTORY
             testDirectory = TEST_TEST_DIRECTORY
+            buildOutputDirectory = TEST_BUILD_OUTPUT_DIRECTORY
         }
 
         expect:
@@ -70,6 +72,7 @@ class DartPluginWithConfigurationTest extends Specification {
         project.dart.pubspecDirectory == TEST_PUBSPEC_DIRECTORY
         project.dart.sourceDirectory == TEST_SOURCE_DIRECTORY
         project.dart.testDirectory == TEST_TEST_DIRECTORY
+        project.dart.buildOutputDirectory == TEST_BUILD_OUTPUT_DIRECTORY
         TEST_EXECUTABLE_DART_FILES.equals(project.dart.executableDartFiles)
         TEST_COMMANDLINE_PARAMETERS.equals(project.dart.commandLineParameters)
     }
