@@ -2,12 +2,13 @@
 
 Provides Gradle integration for Dart projects.
 
-Forked from [steineggerroland/gradle-dart](https://github.com/steineggerroland/gradle-dart)
+Forked from [ngyewch/gradle-dart](https://github.com/ngyewch/gradle-dart), which was
+forked from [steineggerroland/gradle-dart](https://github.com/steineggerroland/gradle-dart)
 
 ## Example usage
 
     plugins {
-        id 'com.github.ngyewch.dart' version '0.3.0'
+        id 'com.github.rmtmckenzie.gradle-dart' version '0.3.1'
     }
 
 

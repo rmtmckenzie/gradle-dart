@@ -33,14 +33,14 @@ group = 'com.github.ngyewch'
 version = '0.3.0'
 
 pluginBundle {
-    website = 'https://github.com/ngyewch/gradle-dart'
-    vcsUrl = 'https://github.com/ngyewch/gradle-dart.git'
+    website = 'https://github.com/rmtmckenzie/gradle-dart'
+    vcsUrl = 'https://github.com/rmtmckenzie/gradle-dart.git'
     description = 'Gradle Dart plugin.'
     tags = ['dart']
 
     plugins {
         dartPlugin {
-            id = 'com.github.ngyewch.dart'
+            id = 'com.github.rmtmckenzie.gradle-dart'
             displayName = 'Gradle Dart plugin'
         }
     }
