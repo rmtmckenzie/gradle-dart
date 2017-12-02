@@ -1,5 +1,6 @@
 package com.github.ngyewch.dart.task
 
+import org.gradle.api.tasks.SourceTask
 import org.gradle.api.tasks.TaskAction
 
 class DartPubGetTask extends AbstractPubTask {
@@ -7,6 +8,8 @@ class DartPubGetTask extends AbstractPubTask {
     DartPubGetTask() {
         project.afterEvaluate {
             inputs.file "${project.dart.pubspecDirectory}/pubspec.yaml"
+            outputs.file "${project.dart.pubspecDirectory}/pubspec.lock"
+            outputs.dir "${project.dart.pubspecDirectory}/.pub"
         }
     }
 
@@ -18,7 +21,7 @@ class DartPubGetTask extends AbstractPubTask {
 
 }
 
-class DartPubUpgradeTask extends AbstractPubTask {
+class DartPubUpgradeTask extends SourceTask {
 
     @TaskAction
     def run() {
