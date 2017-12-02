@@ -6,6 +6,22 @@ import org.gradle.api.tasks.TaskAction
 
 
 class DartPubBuildTask extends DefaultTask {
+
+    DartPubBuildTask() {
+        project.afterEvaluate {
+            inputs.dir project.dart.pubspecDirectory
+
+            String outPath = project.dart.buildOutputDirectory;
+            for(String commandlineParam in project.dart.commandLineParameters) {
+                if (commandlineParam.contains("--output=")) {
+                    outPath = commandlineParam.substring(9)
+                }
+            }
+
+            outputs.dir outPath
+        }
+    }
+
     @TaskAction
     def run() {
         project.logger.lifecycle("Building project")

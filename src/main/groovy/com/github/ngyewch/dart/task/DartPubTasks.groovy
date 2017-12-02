@@ -4,6 +4,12 @@ import org.gradle.api.tasks.TaskAction
 
 class DartPubGetTask extends AbstractPubTask {
 
+    DartPubGetTask() {
+        project.afterEvaluate {
+            inputs.file (project.dart.pubspecDirectory + "pubspec.yaml")
+        }
+    }
+
     @TaskAction
     def run() {
         project.logger.lifecycle("Installing dependencies defined in ${project.dart.pubspecDirectory}/pubspec.yaml")
