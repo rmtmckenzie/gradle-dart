@@ -6,7 +6,7 @@ class DartPubGetTask extends AbstractPubTask {
 
     DartPubGetTask() {
         project.afterEvaluate {
-            inputs.file (project.dart.pubspecDirectory + "pubspec.yaml")
+            inputs.file "${project.dart.pubspecDirectory}/pubspec.yaml"
         }
     }
 
