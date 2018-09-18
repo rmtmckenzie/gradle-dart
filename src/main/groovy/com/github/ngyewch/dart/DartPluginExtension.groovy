@@ -48,6 +48,7 @@ class DartPluginExtension {
         String defaultBuildOutputDirectory = combineStringsWithSlash(projectDirectory, "build/dart")
         project.dart {
             dartSdkBin = ''
+            dartCacheBin = ''
             executableDartFiles = new HashSet<String>()
             checkedMode = false
             commandLineParameters = new HashSet<String>()
