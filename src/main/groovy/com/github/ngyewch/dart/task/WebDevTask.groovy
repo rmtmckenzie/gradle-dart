@@ -26,7 +26,7 @@ abstract class DartWebDevOutputAbstractTask extends DefaultTask {
 
     void executeWebDevCommand(String command) {
         String pubspecDirectory = project.dart.pubspecDirectory
-        String webdevExecutable = "${project.dart.dartCacheBin}pub"
+        String webdevExecutable = "${project.dart.dartCacheBin}webdev"
 
         List<String> commandArgs = Os.isFamily(Os.FAMILY_WINDOWS) ? ['cmd', '/c', webdevExecutable, command] : [command]
         commandArgs.addAll(project.dart.commandLineParameters)

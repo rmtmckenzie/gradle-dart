@@ -4,6 +4,7 @@ import org.gradle.api.Project
 
 class DartPluginExtension {
 	String dartSdkBin
+    String dartCacheBin
     Set<String> executableDartFiles
     Boolean checkedMode
     Set<String> commandLineParameters
@@ -14,10 +15,14 @@ class DartPluginExtension {
     Boolean analysePackagesFolders
     String buildOutputDirectory
 
-    Project project;
+    Project project
 
     void setDartSdkHome(String dartSdkHome) {
         this.dartSdkBin = combineStringsWithSlash(dartSdkHome, "bin/")
+    }
+
+    void setDartCachePath(String dartCachePath) {
+        this.dartCacheBin = combineStringsWithSlash(dartCachePath, "bin/")
     }
 
     void setRelativeSourceDirectory(String relativeSourceDirectory) {
