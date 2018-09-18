@@ -31,15 +31,6 @@ class DartPubUpgradeTask extends SourceTask {
 
 }
 
-class DartPubServeTask extends AbstractPubTask {
-
-    @TaskAction
-    def run() {
-        project.logger.lifecycle("Start a development server for your Webapp")
-        executePubCommand("serve")
-    }
-
-}
 
 class DartPubPublishTask extends AbstractPubTask {
 

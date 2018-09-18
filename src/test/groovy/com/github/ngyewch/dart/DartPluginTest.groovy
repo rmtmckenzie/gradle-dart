@@ -1,13 +1,6 @@
 package com.github.ngyewch.dart
 
-import com.github.ngyewch.dart.task.AnalyseDartTask
-import com.github.ngyewch.dart.task.DartPubGetTask
-import com.github.ngyewch.dart.task.DartPubBuildTask
-import com.github.ngyewch.dart.task.DartPubPublishTask
-import com.github.ngyewch.dart.task.DartPubServeTask
-import com.github.ngyewch.dart.task.DartPubUpgradeTask
-import com.github.ngyewch.dart.task.ExecuteWithDartVmTask
-import com.github.ngyewch.dart.task.TestDartTask
+import com.github.ngyewch.dart.task.*
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
@@ -24,8 +17,8 @@ class DartPluginWithoutConfigurationTest extends Specification {
 		expect:
         project.tasks.pubGet instanceof DartPubGetTask
         project.tasks.pubUpgrade instanceof DartPubUpgradeTask
-        project.tasks.pubBuild instanceof DartPubBuildTask
-        project.tasks.pubServe instanceof DartPubServeTask
+        project.tasks.webDevBuild instanceof DartWebDevBuildTask
+        project.tasks.webDevServe instanceof DartWebDevServeTask
         project.tasks.pubPublish instanceof DartPubPublishTask
         project.tasks.analyseDart instanceof AnalyseDartTask
         project.tasks.testDart instanceof TestDartTask

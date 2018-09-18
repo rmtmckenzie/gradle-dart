@@ -5,7 +5,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "com.gradle.publish:plugin-publish-plugin:0.9.6"
+		classpath "com.gradle.publish:plugin-publish-plugin:0.10.0"
 	}
 }
 
@@ -17,7 +17,7 @@ repositories {
 }
 
 ext {
-    spockVersion = '1.0-groovy-2.4'
+    spockVersion = '1.2-RC3-groovy-2.4'
 }
 
 dependencies {
@@ -29,8 +29,13 @@ dependencies {
     }
 }
 
-group = 'com.github.ngyewch'
-version = '0.3.0'
+// Originally from steineggerroland
+//group = 'de.bolchsteinegger'
+// Then from from ngyewch
+//group = 'com.github.ngyewch'
+// Now from me =)
+group = 'com.github.rmtmckenzie'
+version = '1.0.0'
 
 pluginBundle {
     website = 'https://github.com/rmtmckenzie/gradle-dart'
@@ -44,4 +49,8 @@ pluginBundle {
             displayName = 'Gradle Dart plugin'
         }
     }
+}
+
+wrapper {
+    gradleVersion = '4.10.1'
 }
