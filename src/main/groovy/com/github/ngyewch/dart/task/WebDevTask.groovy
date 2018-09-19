@@ -8,16 +8,25 @@ abstract class DartWebDevOutputAbstractTask extends DefaultTask {
 
     DartWebDevOutputAbstractTask() {
         project.afterEvaluate {
-            inputs.dir project.dart.pubspecDirectory
+
+            inputs.files project.fileTree(project.dart.pubspecDirectory).matching {
+                exclude 'build', '.dart_tool', '.idea'
+            }
 
             String outPath = project.dart.buildOutputDirectory
 
             for(String commandlineParam in project.dart.commandLineParameters) {
                 if (commandlineParam.contains("--output=")) {
                     outPath = commandlineParam.substring(9)
+                    break
                 } else if (commandlineParam.contains("-o ")) {
                     outPath = commandlineParam.substring(3)
+                    break
                 }
+            }
+
+            if (outPath.startsWith("web:")) {
+                outPath = outPath.substring(4)
             }
 
             outputs.dir outPath
@@ -31,7 +40,7 @@ abstract class DartWebDevOutputAbstractTask extends DefaultTask {
         List<String> commandArgs = Os.isFamily(Os.FAMILY_WINDOWS) ? ['cmd', '/c', webdevExecutable, command] : [command]
         commandArgs.addAll(project.dart.commandLineParameters)
         if (!commandArgs.collect{item -> item.contains("--output")}.any()) {
-            commandArgs.add("--output=$project.dart.buildOutputDirectory")
+            commandArgs.add("--output=web:$project.dart.buildOutputDirectory")
         }
 
         project.exec {
