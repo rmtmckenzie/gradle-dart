@@ -89,7 +89,7 @@ abstract class DefaultValueDartPluginExtension {
 
     List<String> getCommandLineParameters() {
         if (commandLineParameters == null) {
-            return project.dart.taskCommandLineParameters
+            return project.dart.commandLineParameters
         }
         return commandLineParameters
     }
