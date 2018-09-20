@@ -17,7 +17,7 @@ abstract class AbstractPubTask extends DefaultTask {
         }
     }
 
-    List<String> getArgs(String command, boolean global, DefaultValueDartPluginExtension conf) {
+    List<String> getArgs(List<String> commands, boolean global, DefaultValueDartPluginExtension conf) {
         List<String> runArgs = []
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             runArgs << '/c' << conf.pubExecutable
@@ -27,15 +27,23 @@ abstract class AbstractPubTask extends DefaultTask {
             runArgs << 'global' << 'run'
         }
 
-        runArgs << command
+        runArgs.addAll(commands)
 
         runArgs.addAll(conf.commandLineParameters)
 
         return runArgs
     }
 
+    List<String> getArgs(String command, boolean global, DefaultValueDartPluginExtension conf) {
+        return getArgs([command], global, conf)
+    }
+
     void executePubCommand(String command, boolean global, DefaultValueDartPluginExtension conf) {
         executePubCommand(conf, getArgs(command, global, conf))
+    }
+
+    void executePubCommand(List<String> commands, boolean global, DefaultValueDartPluginExtension conf) {
+        executePubCommand(conf, getArgs(commands, global, conf))
     }
 
     void executePubCommand(String command, DefaultValueDartPluginExtension conf) {

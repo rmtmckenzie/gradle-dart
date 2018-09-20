@@ -32,7 +32,7 @@ abstract class OutputtingAbstractTask extends AbstractPubTask {
 
 
     @Override
-    void executePubCommand(String command, boolean global, DefaultValueDartPluginExtension conf) {
+    void executePubCommand(List<String> command, boolean global, DefaultValueDartPluginExtension conf) {
         List<String> pubArgs = getArgs(command, global, conf)
 
         if (!pubArgs.collect { item -> item.contains("--output") }.any()) {
@@ -55,7 +55,7 @@ class DartWebDevBuildTask extends OutputtingAbstractTask {
     @TaskAction
     def run() {
         project.logger.lifecycle("Building with WebDev")
-        executePubCommand('webdev build', true, project.dart.webDevServe as DefaultValueDartPluginExtension)
+        executePubCommand(['webdev', 'build'], true, project.dart.webDevServe as DefaultValueDartPluginExtension)
     }
 
 }
@@ -72,7 +72,7 @@ class DartWebDevServeTask extends OutputtingAbstractTask {
     @TaskAction
     def run() {
         project.logger.lifecycle("Serving with WebDev")
-        executePubCommand('webdev serve', true, project.dart.webDevServe as DefaultValueDartPluginExtension)
+        executePubCommand(['webdev','serve'], true, project.dart.webDevServe as DefaultValueDartPluginExtension)
     }
 
 }
