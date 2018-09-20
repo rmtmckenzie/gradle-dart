@@ -85,6 +85,7 @@ class DartPluginWithTaskConfigurationsTest extends Specification implements Dart
         for(DefaultValueDartPluginExtension conf in confs) {
             expect:
             conf.dartSdkBin == TEST_DART_SDK_BIN
+            conf.pubExecutable == TEST_DART_SDK_BIN + "path"
             TEST_COMMANDLINE_PARAMETERS.equals(conf.commandLineParameters)
             conf.pubspecDirectory == TEST_PUBSPEC_DIRECTORY
             conf.sourceDirectory == TEST_SOURCE_DIRECTORY
@@ -153,7 +154,6 @@ class DartPluginWithConfigurationTest extends Specification implements DartPlugi
 
     def setup() {
         project.apply plugin: DartPlugin
-//        project.dart.initDefaultValues(project)
     }
 
     def "defaults test"() {

@@ -128,7 +128,7 @@ abstract class DefaultValueDartPluginExtension {
     }
 
     String getPubExecutable() {
-        return "${dartSdkBin}pub"
+        return "${getDartSdkBin()}pub"
     }
 
     private Project project
