@@ -55,7 +55,7 @@ class DartWebDevBuildTask extends OutputtingAbstractTask {
     @TaskAction
     def run() {
         project.logger.lifecycle("Building with WebDev")
-        executePubCommand(['webdev', 'build'], true, project.dart.webDevServe as DefaultValueDartPluginExtension)
+        executePubCommand(['webdev', 'build'], true, project.dart.webDevBuild as DefaultValueDartPluginExtension)
     }
 
 }
