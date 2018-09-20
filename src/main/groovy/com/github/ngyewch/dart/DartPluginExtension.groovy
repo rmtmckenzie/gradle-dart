@@ -2,27 +2,20 @@ package com.github.ngyewch.dart
 
 import org.gradle.api.Project
 
+
 class DartPluginExtension {
-	String dartSdkBin
-    String dartCacheBin
-    Set<String> executableDartFiles
-    Boolean checkedMode
-    Set<String> commandLineParameters
+    String dartSdkBin
+    List<String> commandLineParameters
     String pubspecDirectory
     String sourceDirectory
     String testDirectory
-    Boolean testPackagesFolders
-    Boolean analysePackagesFolders
     String buildOutputDirectory
+    Set<String> buildIgnore
 
-    Project project
+    private Project project
 
     void setDartSdkHome(String dartSdkHome) {
         this.dartSdkBin = combineStringsWithSlash(dartSdkHome, "bin/")
-    }
-
-    void setDartCachePath(String dartCachePath) {
-        this.dartCacheBin = combineStringsWithSlash(dartCachePath, "bin/")
     }
 
     void setRelativeSourceDirectory(String relativeSourceDirectory) {
@@ -43,24 +36,20 @@ class DartPluginExtension {
         this.project = project
 
         String projectDirectory = "${project.getProjectDir().toString()}"
-        String defaultSourceDirectory = combineStringsWithSlash(projectDirectory, "lib/")
-        String defaultTestDirectory = combineStringsWithSlash(projectDirectory, "test")
-        String defaultBuildOutputDirectory = combineStringsWithSlash(projectDirectory, "build/dart")
+        String defaultDefaultSourceDirectory = combineStringsWithSlash(projectDirectory, "lib/")
+        String defaultDefaultTestDirectory = combineStringsWithSlash(projectDirectory, "test")
+        String defaultDefaultBuildOutputDirectory = combineStringsWithSlash(projectDirectory, "build/dart")
         project.dart {
             dartSdkBin = ''
-            dartCacheBin = ''
-            executableDartFiles = new HashSet<String>()
-            checkedMode = false
-            commandLineParameters = new HashSet<String>()
+            commandLineParameters = []
             pubspecDirectory = projectDirectory
-            sourceDirectory = defaultSourceDirectory
-            testDirectory = defaultTestDirectory
-            testPackagesFolders = false
-            analysePackagesFolders = false
-            buildOutputDirectory = defaultBuildOutputDirectory
+            sourceDirectory = defaultDefaultSourceDirectory
+            testDirectory = defaultDefaultTestDirectory
+            buildOutputDirectory = defaultDefaultBuildOutputDirectory
+            buildIgnore = ['build', '.dart_tool', '.idea']
         }
         if (System.getenv('DART_SDK') != null) {
-            project.dart.dartSdkBin = combineStringsWithSlash("${System.getenv('DART_SDK')}", "bin/")
+            dartSdkBin = combineStringsWithSlash("${System.getenv('DART_SDK')}", "bin/")
         }
     }
 
@@ -79,4 +68,105 @@ class DartPluginExtension {
         }
         return relativeSourceDirectory
     }
+}
+
+abstract class DefaultValueDartPluginExtension {
+
+    private String dartSdkBin = null
+    private List<String> commandLineParameters = null
+    private String pubspecDirectory = null
+    private String sourceDirectory = null
+    private String testDirectory = null
+    private String buildOutputDirectory = null
+    private Set<String> buildIgnoreFiles = null
+
+    String getDartSdkBin() {
+        if (dartSdkBin == null) {
+            return project.dart.dartSdkBin
+        }
+        return dartSdkBin
+    }
+
+    List<String> getCommandLineParameters() {
+        if (commandLineParameters == null) {
+            return project.dart.taskCommandLineParameters
+        }
+        return commandLineParameters
+    }
+
+    String getPubspecDirectory() {
+        if (pubspecDirectory == null) {
+            return project.dart.pubspecDirectory
+        }
+        return pubspecDirectory
+    }
+
+    String getSourceDirectory() {
+        if (sourceDirectory == null) {
+            return project.dart.sourceDirectory
+        }
+    }
+
+    String getTestDirectory() {
+        if (testDirectory == null) {
+            return project.dart.testDirectory
+        }
+    }
+
+    String getBuildOutputDirectory() {
+        if (buildOutputDirectory == null) {
+            return project.dart.buildOutputDirectory
+        }
+        return buildOutputDirectory
+    }
+
+    String getBuildIgnoreFiles() {
+        if (buildIgnoreFiles == null) {
+            return project.dart.buildIgnore
+        }
+        return buildIgnoreFiles
+    }
+
+    String getPubExecutable() {
+        return "${dartSdkBin}pub"
+    }
+
+    private Project project
+
+    void initDefaultValues(Project project) {
+        this.project = project
+    }
+}
+
+class AnalyzeDartExtension extends DefaultValueDartPluginExtension {
+    Boolean analyzePackagesFolders = false
+}
+
+class PubGetExtension extends DefaultValueDartPluginExtension {
+    // Simply to be explicit, not really needed.
+}
+
+class PubPublishExtension extends DefaultValueDartPluginExtension {
+    // Simply to be explicit, not really needed.
+}
+
+class PubUpgradeExtension extends DefaultValueDartPluginExtension {
+    // Simply to be explicit, not really needed.
+}
+
+class ExecuteWithDartVmExtension extends DefaultValueDartPluginExtension {
+    Set<String> files = new HashSet<>()
+}
+
+class TestDartExtension extends DefaultValueDartPluginExtension {
+    // Simply to be explicit, not really needed.
+    Boolean testPackagesFolders = false
+}
+
+class WebDevBuildExtension extends DefaultValueDartPluginExtension {
+    // simply to be explicit, not really needed
+}
+
+class WebDevServeExtension extends DefaultValueDartPluginExtension {
+    // simply to be explicit, not really needed
 }

@@ -1,38 +1,45 @@
 package com.github.ngyewch.dart.task
 
+import com.github.ngyewch.dart.DefaultValueDartPluginExtension
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.DefaultTask
 
 abstract class AbstractPubTask extends DefaultTask {
 
-    void executePubCommand(String command) {
-        String pubspecDirectory = project.dart.pubspecDirectory
-        String pubExecutable = "${project.dart.dartSdkBin}pub"
-        project.exec {
-            workingDir = pubspecDirectory
-            if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                commandLine 'cmd', '/c', pubExecutable, command
-            } else {
-                executable = pubExecutable
-                args = [command]
-                args.addAll(project.dart.commandLineParameters)
-            }
-        }
-    }
-
-    void executePubCommand(String command, Set<String> commandLineParameters) {
-        String pubspecDirectory = project.dart.pubspecDirectory
-        String pubExecutable = "${project.dart.dartSdkBin}pub"
+    void executePubCommand(DefaultValueDartPluginExtension conf, List<String> runArgs) {
+        String pubspecDirectory = conf.pubspecDirectory
+        String runExecutable = Os.isFamily(Os.FAMILY_WINDOWS) ? 'cmd' : conf.pubExecutable
 
         project.exec {
             workingDir = pubspecDirectory
-            if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                commandLine 'cmd', '/c', pubExecutable, command
-            } else {
-                executable = pubExecutable
-                args = [command]
-                args.addAll(project.dart.commandLineParameters)
-            }
+            executable = runExecutable
+            args = runArgs
         }
     }
+
+    List<String> getArgs(String command, boolean global, DefaultValueDartPluginExtension conf) {
+        List<String> runArgs = []
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            runArgs << '/c' << conf.pubExecutable
+        }
+
+        if (global) {
+            runArgs << 'global' << 'run'
+        }
+
+        runArgs << command
+
+        runArgs.addAll(conf.commandLineParameters)
+
+        return runArgs
+    }
+
+    void executePubCommand(String command, boolean global, DefaultValueDartPluginExtension conf) {
+        executePubCommand(conf, getArgs(command, global, conf))
+    }
+
+    void executePubCommand(String command, DefaultValueDartPluginExtension conf) {
+        executePubCommand(conf, getArgs(command, false, conf))
+    }
+
 }
