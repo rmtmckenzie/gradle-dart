@@ -6,9 +6,11 @@ import org.gradle.api.tasks.TaskAction
 abstract class OutputtingAbstractTask extends AbstractPubTask {
 
     protected void setInputsAndOutputs(DefaultValueDartPluginExtension conf) {
+        logger.info("Build is watching ${conf.pubspecDirectory} minus ${conf.buildIgnore}")
+
         // this should be done within
         inputs.files project.fileTree(conf.pubspecDirectory).matching {
-            exclude conf.buildIgnoreFiles
+            exclude conf.buildIgnore
         }
 
         String outPath = conf.buildOutputDirectory

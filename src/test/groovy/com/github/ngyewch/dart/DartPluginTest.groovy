@@ -9,7 +9,6 @@ interface DartPluginTestConstants {
     static final String TEST_DART_SDK_HOME = "TEST_DART_SDK_HOME"
     static final String TEST_DART_SDK_BIN = "TEST_DART_SDK_BIN"
     static final Set<String> TEST_EXECUTABLE_DART_FILES = ["Test.dart", "Test2.dart"]
-    static final Boolean TEST_CHECK_MODE = true
     static final List<String> TEST_COMMANDLINE_PARAMETERS = ["-PARAM1", "-PARAM2"]
     static final String TEST_PUBSPEC_DIRECTORY = "TEST_PUBSPEC_DIRECTORY"
     static final String TEST_SOURCE_DIRECTORY = "TEST_SOURCE_DIRECTORY"

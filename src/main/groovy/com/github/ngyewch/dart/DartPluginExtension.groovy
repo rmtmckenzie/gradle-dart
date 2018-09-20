@@ -78,7 +78,7 @@ abstract class DefaultValueDartPluginExtension {
     String sourceDirectory = null
     String testDirectory = null
     String buildOutputDirectory = null
-    Set<String> buildIgnoreFiles = null
+    Set<String> buildIgnore = null
 
     String getDartSdkBin() {
         if (dartSdkBin == null) {
@@ -120,11 +120,11 @@ abstract class DefaultValueDartPluginExtension {
         return buildOutputDirectory
     }
 
-    String getBuildIgnoreFiles() {
-        if (buildIgnoreFiles == null) {
+    Set<String> getBuildIgnore() {
+        if (buildIgnore == null) {
             return project.dart.buildIgnore
         }
-        return buildIgnoreFiles
+        return buildIgnore
     }
 
     String getPubExecutable() {
