@@ -16,6 +16,14 @@ repositories {
     jcenter()
 }
 
+// Originally from steineggerroland
+//group = 'de.bolchsteinegger'
+// Then from from ngyewch
+//group = 'com.github.ngyewch'
+// Now from me =)
+group = 'com.github.rmtmckenzie'
+version = '1.1.4'
+
 ext {
     spockVersion = '1.2-RC3-groovy-2.4'
 }
@@ -29,13 +37,6 @@ dependencies {
     }
 }
 
-// Originally from steineggerroland
-//group = 'de.bolchsteinegger'
-// Then from from ngyewch
-//group = 'com.github.ngyewch'
-// Now from me =)
-group = 'com.github.rmtmckenzie'
-version = '1.1.3'
 
 pluginBundle {
     website = 'https://github.com/rmtmckenzie/gradle-dart'

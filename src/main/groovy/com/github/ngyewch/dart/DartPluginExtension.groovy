@@ -72,13 +72,13 @@ class DartPluginExtension {
 
 abstract class DefaultValueDartPluginExtension {
 
-    private String dartSdkBin = null
-    private List<String> commandLineParameters = null
-    private String pubspecDirectory = null
-    private String sourceDirectory = null
-    private String testDirectory = null
-    private String buildOutputDirectory = null
-    private Set<String> buildIgnoreFiles = null
+    String dartSdkBin = null
+    List<String> commandLineParameters = null
+    String pubspecDirectory = null
+    String sourceDirectory = null
+    String testDirectory = null
+    String buildOutputDirectory = null
+    Set<String> buildIgnoreFiles = null
 
     String getDartSdkBin() {
         if (dartSdkBin == null) {
