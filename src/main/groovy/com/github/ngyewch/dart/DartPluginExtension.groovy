@@ -46,7 +46,7 @@ class DartPluginExtension {
             sourceDirectory = defaultDefaultSourceDirectory
             testDirectory = defaultDefaultTestDirectory
             buildOutputDirectory = defaultDefaultBuildOutputDirectory
-            buildIgnore = ['build', '.dart_tool', '.idea']
+            buildIgnore = ['build', '.idea']
         }
         if (System.getenv('DART_SDK') != null) {
             dartSdkBin = combineStringsWithSlash("${System.getenv('DART_SDK')}", "bin/")

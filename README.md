@@ -49,7 +49,7 @@ forked from [steineggerroland/gradle-dart](https://github.com/steineggerroland/g
   - Directory of build output
   
 - __buildIgnore__
-  - Default: `['build', '.dart_tool', '.idea']`
+  - Default: `['build', '.idea']`
   - Paths to ignore for build-related tasks (makes build faster)
   
 
